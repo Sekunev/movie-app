@@ -3,15 +3,24 @@ import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
-import SearchIcon from "@mui/icons-material/Search";
 
-const Search = () => {
+import SearchSharpIcon from "@mui/icons-material/SearchSharp";
+import { useAuthContext } from "../context/AuthContext";
+import { useState } from "react";
+
+const Search = ({ search, setSearch }) => {
+  console.log("search :>> ", search);
+
+  const { loading } = useAuthContext();
+  console.log("loading :>> ", loading);
+  // const [loading, setLoading] = useState(true);
+
   return (
-    <>
+    <form>
       <div
         style={{
           display: "flex",
-          justifyContent: "center",
+          // justifyContent: "center",
           alignItems: "center",
           flexDirection: "column",
           flexWrap: "wrap",
@@ -19,7 +28,7 @@ const Search = () => {
         }}
       >
         <Paper
-          component="form"
+          // component="form"
           sx={{
             p: "2px 4px",
             display: "flex",
@@ -31,14 +40,16 @@ const Search = () => {
             sx={{ ml: 1, flex: 1 }}
             placeholder="Search Movie"
             inputProps={{ "aria-label": "search Movie" }}
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
           />
-          <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
-          <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
-            <SearchIcon />
+          <Divider sx={{ height: 32, m: 0.5 }} orientation="vertical" />
+          <IconButton sx={{ "& > button": { m: 1 } }}>
+            <SearchSharpIcon sx={{ fontSize: "1.5rem" }} />
           </IconButton>
         </Paper>
       </div>
-    </>
+    </form>
   );
 };
 

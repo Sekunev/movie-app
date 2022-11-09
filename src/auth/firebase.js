@@ -74,14 +74,16 @@ export const getUser = async (email, password, navigate) => {
 };
 
 //! Bu gözlemci, kullanıcının oturum açma durumu her değiştiğinde çağrılır.
-export const onAuthStateChangedUser = (setLoggedUser) => {
+export const onAuthStateChangedUser = (setLoggedUser, setLoading) => {
   //? Kullanıcının signin olup olmadığını takip eden ve kullanıcı değiştiğinde yeni kullanıcıyı response olarak dönen firebase metodu
   onAuthStateChanged(auth, (user) => {
     if (user) {
       setLoggedUser(user);
+      // setLoading(false);
     } else {
       // User is signed out
       setLoggedUser(false);
+      // setLoading(false);
     }
   });
 };

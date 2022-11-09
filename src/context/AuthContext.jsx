@@ -7,18 +7,15 @@ import { onAuthStateChangedUser } from "../auth/firebase";
 export const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
   const [loggedUser, setLoggedUser] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  // console.log(loggedUser);
+  const values = { loggedUser, loading, setLoading };
 
   useEffect(() => {
-    onAuthStateChangedUser(setLoggedUser);
+    onAuthStateChangedUser(setLoggedUser, setLoading);
   }, []);
 
-  return (
-    <AuthContext.Provider value={{ loggedUser }}>
-      {children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>;
 };
 
 //! Consuming Custom Hook
