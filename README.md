@@ -8,7 +8,7 @@ Project aims to create a Movie App.
 
 ### Visualization of the Website
 
-![image](https://github.com/Sekunev/movie-app-tailwind/blob/main/Animation.gif)
+![image](https://github.com/Sekunev/movie-app/blob/main/Animation.gif)
 
 ## Project Skeleton
 
