@@ -28,8 +28,6 @@ export default function MovieDetail() {
     release_date,
   } = movieDetails;
 
-  console.log("movieDetails", movieDetails);
-
   const API_KEY = process.env.REACT_APP_API_KEY;
   const movieDetailBaseUrl = `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}`;
   const baseImageUrl = "https://image.tmdb.org/t/p/w1280";

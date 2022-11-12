@@ -17,17 +17,18 @@ const Main = () => {
 
   const url2 = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}`;
 
-  useEffect(() => {
-    getFilm();
-  }, []);
-
   const getFilm = async () => {
     const { data } = await axios(search ? url1 : url2).catch((err) =>
       console.log(err)
     );
     setFilmList(data.results);
-    console.log("filmList :>> ", filmList);
+    // console.log("filmList :>> ", filmList);
   };
+
+  useEffect(() => {
+    getFilm();
+    // eslint-disable-next-line
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();

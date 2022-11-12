@@ -1,10 +1,9 @@
 import { Grid } from "@mui/material";
-import Box from "@mui/material/Box";
 import React from "react";
 
 const VideoSection = ({ videoKey }) => {
   return (
-    <Grid item spacing={1}>
+    <Grid item>
       {/* <Grid item xs={6}> */}
       {/* <Box> */}
       <iframe
