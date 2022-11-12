@@ -2,21 +2,12 @@ import * as React from "react";
 import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
 import Divider from "@mui/material/Divider";
-import IconButton from "@mui/material/IconButton";
-
 import SearchSharpIcon from "@mui/icons-material/SearchSharp";
-import { useAuthContext } from "../context/AuthContext";
-import { useState } from "react";
+import { Button } from "@mui/material";
 
-const Search = ({ search, setSearch }) => {
-  console.log("search :>> ", search);
-
-  const { loading } = useAuthContext();
-  console.log("loading :>> ", loading);
-  // const [loading, setLoading] = useState(true);
-
+const Search = ({ search, setSearch, handleSubmit }) => {
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <div
         style={{
           display: "flex",
@@ -33,7 +24,7 @@ const Search = ({ search, setSearch }) => {
             p: "2px 4px",
             display: "flex",
             alignItems: "center",
-            width: 400,
+            width: 380,
           }}
         >
           <InputBase
@@ -44,9 +35,9 @@ const Search = ({ search, setSearch }) => {
             onChange={(e) => setSearch(e.target.value)}
           />
           <Divider sx={{ height: 32, m: 0.5 }} orientation="vertical" />
-          <IconButton sx={{ "& > button": { m: 1 } }}>
+          <Button type="submit" sx={{ "& > button": { m: 1 } }}>
             <SearchSharpIcon sx={{ fontSize: "1.5rem" }} />
-          </IconButton>
+          </Button>
         </Paper>
       </div>
     </form>

@@ -9,12 +9,7 @@ import {
   onAuthStateChanged,
   updateProfile,
 } from "firebase/auth";
-import {
-  toastErrorNotify,
-  toastSuccessNotify,
-  toastWarnNotify,
-} from "../assest/ToastMessage";
-import { getAnalytics } from "firebase/analytics";
+import { toastErrorNotify, toastSuccessNotify } from "../assest/ToastMessage";
 
 // TODO: Replace the following with your app's Firebase project configuration at project settings part
 // See: https://firebase.google.com/docs/web/learn-more#config-object
@@ -30,7 +25,6 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
 
 // Initialize Firebase Authentication and get a reference to the service
 export const auth = getAuth(app);
@@ -97,21 +91,19 @@ export const signOutUser = () => {
     });
 };
 
-//! Google'ı Popup ile Kullanarak Kimlik Doğrulamak için fonksiyon
 //* https://console.firebase.google.com/
 //* => Authentication => sign-in-method => enable Google
 //! Google ile girişi enable yap
 //* => Authentication => settings => Authorized domains => add domain
-//! Projeyi deploy ettikten sonra google sign-in çalışması için domain listesine deploy linkini ekle adres yukarıda.
-export const signUpProvider = (navigate) => {
-  //? Google ile giriş yapılması için kullanılan firebase metodu
+//! Projeyi deploy ettikten sonra google sign-in çalışması için domain listesine deploy linkini ekle
+export const signUpWithGoogle = (navigate) => {
   const provider = new GoogleAuthProvider();
   //? Açılır pencere ile giriş yapılması için kullanılan firebase metodu
   signInWithPopup(auth, provider)
     .then((result) => {
-      console.log(result);
+      // console.log(result);
       navigate("/");
-      toastSuccessNotify("Logged out successfully!");
+      toastSuccessNotify("Logged in successfully!");
     })
     .catch((error) => {
       // Handle Errors here.

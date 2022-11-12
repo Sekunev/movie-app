@@ -8,6 +8,12 @@ import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import { CardActionArea } from "@mui/material";
 import Grid from "@mui/material/Grid";
+import { useAuthContext } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
+import { toastWarnNotify } from "../assest/ToastMessage";
+
+const defaultImage =
+  "https://image.shutterstock.com/image-vector/movie-film-poster-design-template-600w-1246281046.jpg";
 
 export default function MovieCard({
   original_title,
@@ -16,15 +22,34 @@ export default function MovieCard({
   vote_average,
   id,
 }) {
+  const { loggedUser } = useAuthContext();
+  const navigate = useNavigate();
+  const getVoteClass = (vote) => {
+    if (vote >= 8) {
+      return "green";
+    } else if (vote >= 6) {
+      return "orange";
+    } else {
+      return "red";
+    }
+  };
+
   return (
-    <Grid item xs={12} sm={6} md={3} display="flex" justifyContent="center">
+    <Grid display="flex">
       <Card
+        onClick={() => {
+          navigate("details/" + id);
+          !loggedUser && toastWarnNotify("please log in to see details");
+        }}
         sx={{
-          maxWidth: 345,
-          margin: "1rem",
-          boxShadow: "3px 3px 5px rgba(0, 0, 0, 0.1)",
+          // minWidth: 345,
+          margin: "2rem",
+          boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
+
           overflow: "hidden",
           position: "relative",
+          flexWrap: "wrap",
+          width: "300px",
         }}
       >
         <CardActionArea className="card">
@@ -32,10 +57,14 @@ export default function MovieCard({
             sx={{
               objectfit: "cover",
               height: "450px",
-              maxidth: "100%",
+              maxWidth: "100%",
             }}
             component="img"
-            image={`https://image.tmdb.org/t/p/w1280${poster_path}`}
+            image={
+              poster_path
+                ? `https://image.tmdb.org/t/p/w1280${poster_path}`
+                : defaultImage
+            }
           />
 
           <CardActions
@@ -43,7 +72,7 @@ export default function MovieCard({
             sx={{
               alignItems: "center",
               justifyContent: "space-between",
-              backgroundColor: "#999",
+              backgroundColor: "#9c27b0",
               color: "darkblue",
             }}
           >
@@ -74,14 +103,18 @@ export default function MovieCard({
                 },
               }}
             >
-              <Paper
-                sx={{
-                  display: "flex",
-                }}
-                elevation={2}
-              >
-                <span>{vote_average}</span>
-              </Paper>
+              {loggedUser && (
+                <Paper
+                  className={`tag ${getVoteClass(vote_average.toFixed(1))}`}
+                  sx={{
+                    display: "flex",
+                    color: "white",
+                  }}
+                  elevation={2}
+                >
+                  <span>{vote_average}</span>
+                </Paper>
+              )}
             </Box>
           </CardActions>
           <CardContent
@@ -100,6 +133,7 @@ export default function MovieCard({
               transition: "transform 0.3s ease-in-out",
             }}
           >
+            <h2>Overview</h2>
             <Typography display="hidden" variant="body1" color="text.secondary">
               {overview}
             </Typography>

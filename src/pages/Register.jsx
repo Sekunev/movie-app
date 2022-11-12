@@ -11,6 +11,8 @@ import Button from "@mui/material/Button";
 import { createUser } from "../auth/firebase";
 import { useNavigate } from "react-router-dom";
 import Typography from "@mui/material/Typography";
+import GoogleIcon from "../assest/GoogleIcon";
+import { signUpWithGoogle } from "../auth/firebase";
 
 export default function Register() {
   const [values, setValues] = React.useState({
@@ -45,7 +47,9 @@ export default function Register() {
     createUser(email, password, navigate);
     // console.log(email, password);
   };
-
+  const handleGoogleProvider = () => {
+    signUpWithGoogle(navigate);
+  };
   return (
     <Box
       sx={{
@@ -53,9 +57,9 @@ export default function Register() {
       }}
     >
       <Typography align="center" variant="h2" gutterBottom>
-        Register
+        Sing Up
       </Typography>
-      <FormControl
+      <form
         style={{
           display: "flex",
           justifyContent: "center",
@@ -79,6 +83,7 @@ export default function Register() {
             onChange={handleChange("email")}
             label="E-mail address"
             type="email"
+            required
           />
         </FormControl>
         <FormControl
@@ -114,13 +119,32 @@ export default function Register() {
           variant="outlined"
           color="secondary"
           size="large"
+          type="submit"
           onClick={(e) => {
             handleSubmit(e);
           }}
         >
           Register
         </Button>
-      </FormControl>
+        <Button
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            p: 1.5,
+            m: 1,
+            width: "30ch",
+          }}
+          variant="outlined"
+          color="secondary"
+          background="secondary"
+          size="large"
+          type="button"
+          onClick={handleGoogleProvider}
+        >
+          Continue with Google
+          <GoogleIcon />
+        </Button>
+      </form>
     </Box>
   );
 }

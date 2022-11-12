@@ -15,21 +15,31 @@ export default function Navbar() {
 
   // console.log("loggedUser :>> ", loggedUser);
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box
+      sx={{
+        flexGrow: 1,
+        // flexWrap: "wrap",
+      }}
+    >
       <AppBar position="static" color="secondary">
         <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            <Button onClick={() => navigate("/")} size="large" color="inherit">
+          <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
+            <Button
+              onClick={() => navigate("/")}
+              sx={{ fontSize: "1.8rem", textAlign: "left" }}
+              size="large"
+              color="inherit"
+            >
               React Movie App
             </Button>
           </Typography>
           {loggedUser ? (
-            <>
+            <Box sx={{ textAlign: "right" }}>
               <Button color="inherit">{loggedUser?.email}</Button>
               <Button onClick={() => signOutUser()} color="inherit">
                 Logout
               </Button>
-            </>
+            </Box>
           ) : (
             <>
               <Button onClick={() => navigate("/login")} color="inherit">

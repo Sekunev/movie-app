@@ -41,3 +41,25 @@
 .card:hover .cardconten {
   transform: translateX(0%);
 }
+.tag {
+  font-weight: bold;
+  color: white;
+}
+
+.tag.green {
+  background-color: #1b5e20;
+}
+
+.tag.orange {
+  background-color: #f57f17;
+}
+
+.tag.red {
+  background-color: #7f0000;
+}
+ul {
+  font-size: 1.4rem;
+  list-style-type: circle;
+}
+li {
+}
