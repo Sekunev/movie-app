@@ -68,7 +68,8 @@ export default function Login() {
         <Typography align="center" variant="h2" gutterBottom>
           Login
         </Typography>
-        <form
+        <Box
+          component="form"
           style={{
             display: "flex",
             justifyContent: "center",
@@ -91,8 +92,10 @@ export default function Login() {
               onChange={handleChange("email")}
               label="Enter your E-mail adress"
               required={true}
+              autoComplete="email"
             />
           </FormControl>
+
           <FormControl
             sx={{ m: 1, width: "35ch" }}
             variant="outlined"
@@ -149,8 +152,9 @@ export default function Login() {
             Continue with Google
             <GoogleIcon />
           </Button>
-        </form>
+        </Box>
       </Box>
+
       <Footer />
     </>
   );
