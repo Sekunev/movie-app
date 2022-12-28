@@ -39,7 +39,7 @@ export default function MovieCard({
       <Card
         onClick={() => {
           navigate("details/" + id);
-          !loggedUser && toastWarnNotify("please log in to see details");
+          !loggedUser && toastWarnNotify("Please log in to see details");
         }}
         sx={{
           // minWidth: 345,
